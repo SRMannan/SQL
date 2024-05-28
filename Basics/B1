@@ -1,0 +1,46 @@
+-- Creating the customer table with id, first_name, last_name, and salary columns
+CREATE TABLE customer (
+    id INT AUTO_INCREMENT,          -- id is an auto-incrementing integer and serves as the primary key
+    first_name VARCHAR(20),         -- first_name is a variable character field up to 20 characters
+    last_name VARCHAR(20),          -- last_name is a variable character field up to 20 characters
+    salary INT,                     -- salary is an integer field
+    PRIMARY KEY (id)                -- id is the primary key of the table
+);
+
+-- Inserting records into the customer table
+INSERT INTO customer (first_name, last_name, salary) VALUES ('sharry', 'mannan', 40000);
+INSERT INTO customer (first_name, last_name, salary) VALUES ('tarry', 'kannan', 30000);
+INSERT INTO customer (first_name, last_name, salary) VALUES ('qharry', 'qannan', 20000);
+INSERT INTO customer (first_name, last_name, salary) VALUES ('wharry', 'wannan', NULL);
+
+-- THIS IS A NULL QUERY EXAMPLE --
+-- Selecting all customers where salary is not null
+SELECT * FROM customer WHERE salary IS NOT NULL;
+
+-- Updating the salary of the customer with id = 4
+UPDATE customer SET salary = 5000 WHERE id = 4;
+
+-- SQL DELETE STATEMENT --
+-- Deleting customers where salary is 5000
+DELETE FROM customer WHERE salary = 5000;
+
+-- SQL ALTER TABLE
+-- Adding a date of birth (dob) column to the existing customer table
+ALTER TABLE customer ADD dob DATE;
+
+-- Modifying the dob column to a year data type (not recommended for existing date data)
+-- Note: Changing DATE to YEAR may not be supported in some DBMS, and could lead to data loss if the column already contains DATE data.
+ALTER TABLE customer MODIFY dob YEAR;
+
+-- Describe the table schema to see the final structure
+DESC customer;
+
+-- Selecting all records from the customer table to see the final state
+SELECT * FROM customer;
+
+-- SQL DROP COLUMN
+-- Dropping the dob column from the existing customer table
+ALTER TABLE customer DROP dob;
+
+-- Selecting all records from the customer table to see the final state after dropping the column
+SELECT * FROM customer;
