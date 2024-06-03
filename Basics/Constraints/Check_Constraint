@@ -1,0 +1,17 @@
+-- Create a table to store information about people
+CREATE TABLE person (
+    id INT NOT NULL,                 -- Unique identifier for each person
+    fname VARCHAR(25) NOT NULL,     -- First name of the person
+    lname VARCHAR(25) NOT NULL,     -- Last name of the person
+    age INT NOT NULL,               -- Age of the person
+    salary DECIMAL(10,2),           -- Salary of the person
+    PRIMARY KEY(id),                -- Define id as the primary key
+    CHECK (salary < 5000)           -- Add a check constraint to ensure salary is less than 5000
+);
+
+-- Insert data into the person table
+INSERT INTO person (id, fname, lname, age, salary) VALUES (1, 'sharry', 'mannan', 22, 4800);
+INSERT INTO person (id, fname, lname, age, salary) VALUES (2, 'qharry', 'qannan', 23, 4300);
+
+-- Select all rows from the person table
+SELECT * FROM person;
