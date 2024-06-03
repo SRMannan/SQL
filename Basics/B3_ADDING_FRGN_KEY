@@ -1,0 +1,23 @@
+-- Create a table to store information about people
+CREATE TABLE person (
+    id INT NOT NULL,                 -- Unique identifier for each person
+    fname VARCHAR(25) NOT NULL,     -- First name of the person
+    lname VARCHAR(25) NOT NULL,     -- Last name of the person
+    age INT NOT NULL,               -- Age of the person
+    salary DECIMAL(10,2),           -- Salary of the person
+    PRIMARY KEY(id)                  -- Define id as the primary key
+);
+
+-- Create a table to store information about departments
+CREATE TABLE department(
+    id INT NOT NULL,                     -- Unique identifier for each department
+    department_id INT NOT NULL,          -- Unique identifier for each department
+    department_name VARCHAR(20) NOT NULL,-- Name of the department
+    PRIMARY KEY(department_id)           -- Define department_id as the primary key
+);
+
+-- Add a foreign key constraint to link department to person
+ALTER TABLE department ADD CONSTRAINT fk_person_department FOREIGN KEY (id) REFERENCES person(id);
+
+-- Describe the structure of the department table
+DESC department;
