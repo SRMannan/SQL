@@ -1,0 +1,17 @@
+-- Create a table to store information about people
+CREATE TABLE person (
+    id INT NOT NULL,                -- Unique identifier for each person
+    fname VARCHAR(25) NOT NULL,    -- First name of the person
+    lname VARCHAR(25) NOT NULL,    -- Last name of the person
+    city VARCHAR(10) DEFAULT 'DELHI'  -- City where the person lives, defaulting to 'DELHI'
+);
+
+-- Insert data into the person table
+INSERT INTO person (id, fname, lname) VALUES (1, 'sharry', 'mannan');
+INSERT INTO person (id, fname, lname) VALUES (2, 'qharry', 'qannan');
+
+-- Select all rows from the person table
+SELECT * FROM person;
+
+-- Remove the default value constraint from the city column
+ALTER TABLE person ALTER COLUMN city DROP DEFAULT;
