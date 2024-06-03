@@ -1,0 +1,36 @@
+CREATE TABLE Employee
+(
+    id INT AUTO_INCREMENT,
+    name VARCHAR(20),
+    age INT NOT NULL,
+    salary DECIMAL(10),
+    city VARCHAR(20) DEFAULT 'delhi',
+    PRIMARY KEY(id)
+);
+
+INSERT INTO Employee (name, age, salary, city) VALUES
+('Alice', 30, 3000.00, 'delhi'),
+('Bob', 35, 4000.00, 'mumbai'),
+('Charlie', 28, 3500.00, 'bangalore'),
+('David', 32, 3200.00, 'delhi'),
+('Eva', 29, 3100.00, 'pune'),
+('Frank', 40, 4500.00, 'chennai'),
+('Grace', 31, 3700.00, 'delhi'),
+('Hank', 27, 3300.00, 'kolkata'),
+('Ivy', 36, 4200.00, 'delhi'),
+('John', 33, 3800.00, 'delhi');
+
+SELECT * FROM Employee;
+      
+-- alter table Employee drop column city;
+-- alter table Employee rename to EMP;
+-- alter table Employee rename column city to seher;
+-- UPDATE Employee SET salary = 50000 WHERE city = 'delhi';
+
+select name , salary ,
+    case when salary < 3000 then 'LOW'
+    when salary between 3000 AND 4000 then 'MID'
+    when salary > 4000 then 'HIGH'
+END as criteria from Employee;
+
+SELECT * FROM Employee;
