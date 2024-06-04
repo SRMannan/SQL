@@ -1,0 +1,103 @@
+-- Create the department table
+CREATE TABLE department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(100)
+);
+
+-- Insert entries into the department table
+INSERT INTO department (dept_id, dept_name)
+VALUES
+(101, 'Human Resources'),
+(102, 'Engineering'),
+(103, 'Marketing');
+
+-- Create the employee table
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(100),
+    salary DECIMAL(10, 2),
+    dept_id INT,
+    manager_id INT,
+    FOREIGN KEY (dept_id) REFERENCES department(dept_id),
+    FOREIGN KEY (manager_id) REFERENCES employee(emp_id)
+);
+
+-- Insert entries into the employee table
+INSERT INTO employee (emp_id, emp_name, salary, dept_id, manager_id)
+VALUES
+(1, 'Alice Johnson', 75000.00, 101, NULL),
+(2, 'Bob Smith', 68000.00, 102, 1),
+(3, 'Charlie Rose', 72000.00, 101, 1),
+(4, 'Diana Evans', 65000.00, 103, 2),
+(5, 'Evan Harris', 70000.00, 102, 2),
+(6, 'Fiona Green', 71000.00, 101, 3);
+
+-- Create the manager table
+CREATE TABLE manager (
+    manager_id INT PRIMARY KEY,
+    manager_name VARCHAR(100),
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES department(dept_id)
+);
+
+-- Insert entries into the manager table
+INSERT INTO manager (manager_id, manager_name, dept_id)
+VALUES
+(1, 'Alice Johnson', 101),
+(2, 'Bob Smith', 102),
+(3, 'Charlie Rose', 101),
+(4, 'Diana Evans', 103);
+
+-- Create the project table
+CREATE TABLE project (
+    project_id INT PRIMARY KEY,
+    project_name VARCHAR(100),
+    team_member_id INT,
+    FOREIGN KEY (team_member_id) REFERENCES employee(emp_id)
+);
+
+-- Insert entries into the project table
+INSERT INTO project (project_id, project_name, team_member_id)
+VALUES
+(1, 'Project Alpha', 1),
+(2, 'Project Beta', 2),
+(3, 'Project Gamma', 3),
+(4, 'Project Delta', 4),
+(5, 'Project Epsilon', 5),
+(6, 'Project Zeta', 6);
+
+-- Fetch employee name and dept name they belong to using INNER JOIN
+-- Inner join returns only the rows with matching values in both tables
+-- This will only show employees who are assigned to a department
+SELECT e.emp_name, d.dept_name
+FROM employee e 
+JOIN department d ON e.dept_id = d.dept_id;
+
+-- Be cautious about the order in which you provide the table name
+-- Left side of join is left table
+-- Right side of join is right table
+-- Modify query to get all employees with unassigned depts too
+-- Left join = inner join + additional join from left hand side of the table
+-- Fetch all employees and their departments using LEFT JOIN
+-- Left join returns all rows from the left table and the matched rows from the right table
+-- This will show all employees, including those not assigned to any department
+SELECT e.emp_name, d.dept_name
+FROM employee e 
+LEFT JOIN department d ON e.dept_id = d.dept_id;
+
+-- Modify query to get all depts with unassigned people too
+-- Right join = inner join + additional join from right table
+-- Fetch all departments and their employees using RIGHT JOIN
+-- Right join returns all rows from the right table and the matched rows from the left table
+-- This will show all departments, including those with no assigned employees
+SELECT e.emp_name, d.dept_name
+FROM employee e 
+RIGHT JOIN department d ON e.dept_id = d.dept_id;
+
+-- Query to output all employees, their manager_name, their dept, and the project they work on
+-- This complex join involves multiple tables to provide a comprehensive view of employee details
+SELECT e.emp_name, m.manager_name, d.dept_name, p.project_name
+FROM employee e 
+LEFT JOIN department d ON e.dept_id = d.dept_id
+LEFT JOIN manager m ON e.manager_id = m.manager_id
+LEFT JOIN project p ON e.emp_id = p.team_member_id;
