@@ -97,5 +97,56 @@ TCL commands are used to manage transactions in a database. A transaction is a s
   SAVEPOINT sp1;
 
 
+### 5. **Constraints**
+Constraints are rules enforced on data columns in a table to ensure data integrity.
+
+- **PRIMARY KEY**: Uniquely identifies each record in a table.
+  ```sql
+  CREATE TABLE Employees (
+      EmployeeID int PRIMARY KEY,
+      FirstName varchar(255),
+      LastName varchar(255)
+  );
+
+- **FOREIGN KEY**: Ensures referential integrity by linking to a primary key in another table.
+  ```sql
+  CREATE TABLE Orders (
+      OrderID int,
+      EmployeeID int,
+      FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
+  );
 
 
+- **CHECK**: Ensures that all values in a column satisfy a specific condition.
+  ```sql
+  CREATE TABLE Employees (
+      EmployeeID int PRIMARY KEY,
+      Age int CHECK (Age >= 18)
+  );
+
+
+- **UNIQUE**: Ensures that all values in a column or a set of columns are unique.
+  ```sql
+  CREATE TABLE Employees (
+      EmployeeID int PRIMARY KEY,
+      Email varchar(255) UNIQUE
+  );
+
+
+- **DEFAULT**: Sets a default value for a column if no value is provided.
+  ```sql
+  CREATE TABLE Employees (
+      EmployeeID int PRIMARY KEY,
+      StartDate date DEFAULT CURRENT_DATE
+  );
+
+
+- **NOT NULL**: Ensures that a column cannot have a NULL value.
+  ```sql
+  CREATE TABLE Employees (
+      EmployeeID int PRIMARY KEY,
+      LastName varchar(255) NOT NULL
+  );
+
+
+The SQL code is now correctly formatted 
