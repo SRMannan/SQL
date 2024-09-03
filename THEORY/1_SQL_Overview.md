@@ -32,17 +32,14 @@ DDL commands are used to define and manage the structure of a database and its o
   ALTER TABLE Employees ADD COLUMN BirthDate date;
 
 - **DROP**: Used to delete database objects like tables or databases.
-
   ```sql
   DROP TABLE Employees;
 
 - **TRUNCATE**: Used to remove all records from a table, but the structure remains.
-
   ```sql
   TRUNCATE TABLE Employees;
 
-  - **RENAME**: Used to rename a database object.
-
+- **RENAME**: Used to rename a database object.
   ```sql
   RENAME TABLE Employees TO Staff;
 
