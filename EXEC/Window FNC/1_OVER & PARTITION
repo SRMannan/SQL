@@ -1,0 +1,38 @@
+
+-- calculate avg marks over all branches
+select * , avg(marks) 
+over() 
+from marks;
+
+-- -- calculate avg marks over particular branches
+select * , avg(marks) 
+over(partition by branch) 
+from marks;
+
+-- give min and max marks of the table
+select * , 
+MIN(marks) OVER(),
+MAX(marks) OVER(),
+MIN(marks) OVER(partition by branch),
+MAX(marks) OVER(partition by branch)
+from marks;
+
+-- give me the data of all those students who have score more marks than avg of their branch
+-- correlated way
+select * from marks m1
+where marks > (
+	select avg(marks) 
+	from marks m2
+	where m1.branch = m2.branch
+);
+
+-- window fnc way
+WITH AvgMarks AS (
+    SELECT *,
+           AVG(marks) OVER (PARTITION BY branch) AS avgg
+    FROM marks
+)
+SELECT *
+FROM AvgMarks
+WHERE marks > avgg;
+
