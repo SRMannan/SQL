@@ -1,0 +1,22 @@
+-- RANK
+-- The RANK() function in SQL is a window function that assigns a unique rank to each row within a partition of a result set. 
+-- Rows with equal values receive the same rank, but the next rank(s) will be skipped, resulting in gaps. 
+
+select * , RANK() OVER(order BY marks desc)
+from marks;
+
+select * , RANK() OVER(partition by branch order BY marks desc)
+from marks;
+
+-- DENSE RANK
+select * , RANK() OVER(partition by branch order BY marks desc) , DENSE_RANK() OVER(partition by branch order BY marks desc)
+from marks;
+
+-- ROW NUMBER
+select * , ROW_NUMBER() OVER() , ROW_NUMBER() OVER(partition by branch)
+from marks;
+
+-- row number with concat
+select * ,
+concat(branch , ' - ' , ROW_NUMBER() OVER(partition by branch))
+from marks;
