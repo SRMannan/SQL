@@ -1,0 +1,18 @@
+-- FIRST VALUE , LAST VALUE , NTH VALUE
+
+-- find the branch topper
+SELECT * , FIRST_VALUE(name) OVER (partition by Branch order BY marks desc)
+from marks;
+
+-- find the branch dropper
+select * , LAST_VALUE(name) OVER(partition by Branch order by marks desc)
+from marks;
+
+-- lead and lag
+select * , lag(marks)
+over(order by marks DESC)
+from marks;
+
+select * , lead(marks)
+over(order by marks DESC)
+from marks;
